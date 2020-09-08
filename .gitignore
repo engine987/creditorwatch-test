@@ -1,0 +1,7 @@
+/tmp/*
+/logs/*
+.idea/
+.DS_Store
+/webroot/.DS_Store
+/vendor
+test-results/
