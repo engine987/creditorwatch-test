@@ -39,7 +39,7 @@ you have taken.
 5. Open http://localhost:8000 in a browser
 
 ## Details
-1. I have used Factory method, Dependency injection, and the Facade patterns.
+1. I have used Factory method to create Search Clients, Dependency injection so that my classes are not tied down to any one impletementation of a Search Client, and the Facade pattern to hide the complexity of the Search Service.
 2. I have written the code around "services" where GoogleSearchService acts as an entry point into 
    searching Google. If we were searching Bing, there could be a "BingSearchService".  
 2. This code works on PHP 7.3 running on Mac OS. 
