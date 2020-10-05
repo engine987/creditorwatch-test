@@ -23,15 +23,14 @@ class KeywordSearch
     public function parseResultsForWebsite(string $keyWords, string $website)
     {
        $results = $this->service->getLinksFromSearch($keyWords);
-       $count = 0;
+       $position = [];
 
-
-       foreach ($results as $result) {
-           if (stripos($result['link'], $website) !== false || stripos($result['display_link'], $website) !== false) {
-               $count++;
+       for($i = 0; $i <= count($results); $i++){
+           if (stripos($results[$i]['link'], $website) !== false || stripos($results[$i]['display_link'], $website) !== false) {
+               $position[] = $i+1;
            }
        }
 
-       return $count;
+       return $position;
     }
 }

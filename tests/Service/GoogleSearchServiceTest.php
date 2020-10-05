@@ -28,7 +28,6 @@ class GoogleSearchServiceTest extends TestCase
             $this->onConsecutiveCalls('www.creditorwatch.com.au', 'www.veda.com.au', 'www.dunnandbradstreet.com.au', 'www.experian.com.au')
         );
 
-        //Hackity hack hack ...
         $array = [$mockedResult, $mockedResult, $mockedResult, $mockedResult];
         $searchService->expects($this->once())
             ->method('search')

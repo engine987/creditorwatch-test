@@ -5,10 +5,16 @@ use App\Classes\KeywordSearch;
 use App\Factories\GoogleClientFactory;
 use App\Classes\Layout;
 use App\Service\GoogleSearchService;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
+$loader = new FilesystemLoader(__DIR__ . '/templates');
+$twig = new Environment($loader);
 
-Layout::header();
-Layout::form($_POST);
+echo $twig->render('header.html.twig');
+echo $twig->render('form.html.twig', 
+	['keywords' => $_POST['keywords'] ?? '', 'website' => $_POST['website'] ?? '' ]
+);
 
 if (isset($_POST['keywords']) && isset($_POST['website'])) {
 
@@ -16,12 +22,16 @@ if (isset($_POST['keywords']) && isset($_POST['website'])) {
     $service = new App\Service\GoogleSearchService(GoogleClientFactory::getCustomSearch());
 
     $parser = new KeywordSearch($service);
-    $count = $parser->parseResultsForWebsite($_POST['keywords'], $_POST['website']);
+    $position = $parser->parseResultsForWebsite($_POST['keywords'], $_POST['website']);
 
-    print "<div style='text-align: center; font-weight: bold'>Website appears $count times</div>";
+    $positionString = '0';
+    if (count($position)) {
+        $positionString = join(', ', $position);
+    }
+
+	echo $twig->render('result.html.twig', ['position' => $positionString] );
 }
 
-Layout::footer();
-
+echo $twig->render('footer.html.twig');
 ?>
 

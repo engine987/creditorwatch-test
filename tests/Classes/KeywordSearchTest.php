@@ -31,8 +31,8 @@ class KeywordSearchTest extends TestCase
             ->willReturn($expectedArray);
 
         $keyWordSearch = new KeywordSearch($service);
-        $count = $keyWordSearch->parseResultsForWebsite('Credit Checks', 'www.creditorwatch.com.au');
+        $position = $keyWordSearch->parseResultsForWebsite('Credit Checks', 'www.creditorwatch.com.au');
 
-        $this->assertEquals(1, $count);
+        $this->assertEquals('1', $position[0]);
     }
 }
