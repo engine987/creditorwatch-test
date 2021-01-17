@@ -15,4 +15,9 @@
         </whitelist>
     </filter>
 
+    <php>
+        <env name="GCSE_API_KEY" value="testing" force="true" />
+        <env name="GCSE_SEARCH_ENGINE_ID" value="testing" force="true" />
+    </php>
+
 </phpunit>

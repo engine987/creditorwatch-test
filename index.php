@@ -8,6 +8,9 @@ use App\Service\GoogleSearchService;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 $loader = new FilesystemLoader(__DIR__ . '/templates');
 $twig = new Environment($loader);
 
@@ -19,7 +22,7 @@ echo $twig->render('form.html.twig',
 if (isset($_POST['keywords']) && isset($_POST['website'])) {
 
     /** @var App\Service\GoogleSearchService $service */
-    $service = new App\Service\GoogleSearchService(GoogleClientFactory::getCustomSearch());
+    $service = new App\Service\GoogleSearchService(new GoogleClientFactory());
 
     $parser = new KeywordSearch($service);
     $position = $parser->parseResultsForWebsite($_POST['keywords'], $_POST['website']);

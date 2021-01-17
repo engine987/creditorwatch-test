@@ -35,8 +35,9 @@ you have taken.
 1. Clone the repository
 2. cd into the application directory
 3. Run : ``composer install``
-4. Run: ``/usr/bin/php -S localhost:8000 -t .``
+4. Run: ``make serve``
 5. Open http://localhost:8000 in a browser
+6. To run unit tests: ``make test``
 
 ## Details
 1. I have used Factory method to create Search Clients, Dependency injection so that my classes are not tied down to any one impletementation of a Search Service, and the Facade pattern to hide the complexity of the Search Service.

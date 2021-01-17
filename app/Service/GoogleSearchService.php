@@ -29,7 +29,7 @@ class GoogleSearchService implements SearchServiceInterface
      * @param string $searchString
      * @return array
      */
-    public function search(string $searchString)
+    public function search(string $searchString): array
     {
        /** @var \Google_Service_Customsearch_Search[] $searchResults */
        $searchResults = [];
@@ -38,20 +38,11 @@ class GoogleSearchService implements SearchServiceInterface
            'num' => self::RESULTS_PER_REQUEST
        ]);
 
-       $attempts = ceil(self::MAX_RESULTS_LIMIT/self::RESULTS_PER_REQUEST);
        try {
-           //Google returns only 10 results per search.
-           for ($i = 0; $i < $attempts; $i++) {
-               $params['start'] = (self::RESULTS_PER_REQUEST * $i) + 1;
-               $result = $this->googleServiceCustomSearch->cse->listCse($params);
-               foreach ($result->getItems() as $record) {
-                   $searchResults[] = $record;
-               }
-           }
-
-           return $searchResults;
+           return $this->getSearchResults($params);
        } catch (\Exception $e) {
            print 'Exception : ' . $e->getMessage() . '\n';
+           return [];
        }
     }
 
@@ -59,12 +50,29 @@ class GoogleSearchService implements SearchServiceInterface
      * @param string $searchString
      * @return array
      */
-    public function getLinksFromSearch(string $searchString)
+    public function getLinksFromSearch(string $searchString): array
     {
         $results = $this->search($searchString);
 
         return array_map(function($record) {
            return ['link' => $record->getHtmlFormattedUrl(), 'display_link' => $record->getDisplayLink()];
         }, $results);
+    }
+
+    protected function getSearchResults(array $params): array
+    {
+        $attempts = ceil(self::MAX_RESULTS_LIMIT/self::RESULTS_PER_REQUEST);
+        $searchResults = [];
+
+        //Google returns only 10 results per search.
+        for ($i = 0; $i < $attempts; $i++) {
+            $params['start'] = (self::RESULTS_PER_REQUEST * $i) + 1;
+            $result = $this->googleServiceCustomSearch->cse->listCse($params);
+            foreach ($result->getItems() as $record) {
+                $searchResults[] = $record;
+            }
+        }
+
+        return $searchResults;
     }
 }

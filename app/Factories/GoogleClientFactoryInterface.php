@@ -11,7 +11,6 @@ namespace App\Factories;
 
 interface GoogleClientFactoryInterface
 {
-    public static function getCustomSearch();
     public function getService();
     public function getBaseParams();
 }

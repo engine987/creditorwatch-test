@@ -15,20 +15,12 @@ use PHPUnit\Framework\TestCase;
 
 class GoogleClientFactoryTest extends TestCase
 {
-    const GCSE_API_KEY = "AIzaSyCcWgAanyRm1CkYE8De44xeXD8b6lAjHIY";
-    const GCSE_SEARCH_ENGINE_ID = "e17ee70ab87bd903c";
-
     protected $factory;
 
     public function setUp()
     {
         parent::setUp();
-        $this->factory = GoogleClientFactory::getCustomSearch();
-    }
-
-    public function testGetCustomSearchReturnsFactory()
-    {
-        $this->assertInstanceOf(GoogleClientFactory::class, $this->factory);
+        $this->factory = new GoogleClientFactory();
     }
 
     public function testServiceAttributeIsGoogleService()

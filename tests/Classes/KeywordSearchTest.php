@@ -9,7 +9,6 @@
 namespace App\Test\Classes;
 
 use App\Classes\KeywordSearch;
-use App\Service\GoogleSearchService;
 use App\Service\SearchServiceInterface;
 use PHPUnit\Framework\TestCase;
 

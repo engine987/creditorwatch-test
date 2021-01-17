@@ -12,7 +12,7 @@ class GoogleSearchServiceTest extends TestCase
 {
     public function testGetLinksFromSearch()
     {
-        $factory = GoogleClientFactory::getCustomSearch();
+        $factory = new GoogleClientFactory();
 
         $searchService = $this->getMockBuilder(GoogleSearchService::class)
             ->setConstructorArgs([$factory])

@@ -1,7 +1,8 @@
 {
     "require": {
         "google/apiclient": "^2.7",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "vlucas/phpdotenv": "^5.2"
     },
     "autoload": {
         "psr-4": {
@@ -17,8 +18,6 @@
         }
     },
     "scripts": {
-        "cs-check": "phpcs --colors -p --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/",
-        "cs-fix": "phpcbf --colors --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/",
         "test": "phpunit --colors=always"
     },    
     "prefer-stable": true,
