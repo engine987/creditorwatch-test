@@ -32,7 +32,7 @@ class GoogleClientFactory implements GoogleClientFactoryInterface
     /**
      * @return Google_Service_Customsearch
      */
-    public function getService()
+    public function getService(): Google_Service_Customsearch
     {
         return $this->service;
     }
@@ -40,7 +40,7 @@ class GoogleClientFactory implements GoogleClientFactoryInterface
     /**
      * @return array
      */
-    public function getBaseParams()
+    public function getBaseParams(): array
     {
         return $this->baseParams;
     }

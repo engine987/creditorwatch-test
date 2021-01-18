@@ -25,7 +25,7 @@ class KeywordSearch
        $results = $this->service->getLinksFromSearch($keyWords);
        $position = [];
 
-       for($i = 0; $i <= count($results); $i++){
+       for($i = 0; $i < count($results); $i++){
            if (stripos($results[$i]['link'], $website) !== false || stripos($results[$i]['display_link'], $website) !== false) {
                $position[] = $i+1;
            }

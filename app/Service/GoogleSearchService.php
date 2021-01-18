@@ -4,6 +4,8 @@ namespace App\Service;
 
 use App\Factories\GoogleClientFactoryInterface;
 use Google_Service_Customsearch;
+use Google_Service_Customsearch_Result;
+use Google_Service_Customsearch_Search;
 
 /*
  * Connects to Google and returns an array of results
@@ -31,8 +33,6 @@ class GoogleSearchService implements SearchServiceInterface
      */
     public function search(string $searchString): array
     {
-       /** @var \Google_Service_Customsearch_Search[] $searchResults */
-       $searchResults = [];
        $params = array_merge($this->options, [
            'q' => $searchString,
            'num' => self::RESULTS_PER_REQUEST
@@ -59,6 +59,10 @@ class GoogleSearchService implements SearchServiceInterface
         }, $results);
     }
 
+    /**
+     * @param array $params
+     * @return Google_Service_Customsearch_Result[]
+     */
     protected function getSearchResults(array $params): array
     {
         $attempts = ceil(self::MAX_RESULTS_LIMIT/self::RESULTS_PER_REQUEST);

@@ -10,14 +10,13 @@ namespace App\Test\Factories;
 
 use App\Factories\GoogleClientFactory;
 
-use Google_Service_Customsearch;
 use PHPUnit\Framework\TestCase;
 
 class GoogleClientFactoryTest extends TestCase
 {
     protected $factory;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->factory = new GoogleClientFactory();
@@ -25,6 +24,7 @@ class GoogleClientFactoryTest extends TestCase
 
     public function testServiceAttributeIsGoogleService()
     {
-        $this->assertAttributeInstanceOf(Google_Service_Customsearch::class, 'service', $this->factory);
+        $service = $this->factory->getService();
+        $this->assertInstanceOf(\Google_Service_Customsearch::class,  $service);
     }
 }

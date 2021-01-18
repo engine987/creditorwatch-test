@@ -5,3 +5,5 @@
 /webroot/.DS_Store
 /vendor
 test-results/
+.phpunit.cache/
+.phpunit.result.cache

@@ -6,7 +6,9 @@ use App\Service\GoogleSearchService;
 use App\Factories\GoogleClientFactory;
 
 use Google_Service_Customsearch_Result;
+use Pettibon\AppBundle\Entity\Message\Event;
 use PHPUnit\Framework\TestCase;
+use function PHPUnit\Framework\once;
 
 class GoogleSearchServiceTest extends TestCase
 {
@@ -41,8 +43,26 @@ class GoogleSearchServiceTest extends TestCase
         ];
 
         $response = $searchService->getLinksFromSearch('Credit Checks');
-        $arrayDiff = array_diff($expectedArray, $response);
+        for ($i = 0; $i < count($expectedArray); $i++) {
+            $this->assertEquals($expectedArray[$i], $response[$i]);
+        }
+    }
 
-        $this->assertEquals(0, count($arrayDiff));
+    public function testSearch()
+    {
+        $factory = new GoogleClientFactory();
+
+        $searchService = $this->getMockBuilder(GoogleSearchService::class)
+            ->setConstructorArgs([$factory])
+            ->setMethods(['getSearchResults'])
+            ->getMock();
+
+        $mockedResult = $this->createMock(Google_Service_Customsearch_Result::class);
+        $searchService->expects($this->once())
+            ->method('getSearchResults')
+            ->willReturn([$mockedResult]);
+
+        $result = $searchService->search('boo');
+        $this->assertInstanceOf(Google_Service_Customsearch_Result::class, $result[0]);
     }
 }
