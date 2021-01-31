@@ -47,6 +47,6 @@ you have taken.
 3. ### Short cuts
     - (a) The Service can be expanded to give other information also (like stats), not just links
     - (b) The HTML interface is not pretty, in a production environment, I would be using a CSS Library like Bootstrap
-    - (c) I do not have a 100% percent code coverage, but I have written tests to demonstrate that I understand mocks.  
+    - (c) I do not have a 100% percent code coverage, but I have written tests to demonstrate that I understand the concepts.  
         
     
