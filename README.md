@@ -43,7 +43,7 @@ you have taken.
 1. I have used Factory method to create Search Clients, Dependency injection so that my classes are not tied down to any one impletementation of a Search Service, and the Facade pattern to hide the complexity of the Search Service.
 2. I have written the code around "services" where GoogleSearchService acts as an entry point into 
    searching Google. If we were searching Bing, there could be a "BingSearchService".  
-2. This code works on PHP 7.3 running on Mac OS. 
+2. This code works on PHP 7.4 running on Mac OS. 
 3. ### Short cuts
     - (a) The Service can be expanded to give other information also (like stats), not just links
     - (b) The HTML interface is not pretty, in a production environment, I would be using a CSS Library like Bootstrap
